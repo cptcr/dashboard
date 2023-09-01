@@ -1,0 +1,19 @@
+{
+  "name": "dashboard-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "toowake",
+  "license": "MIT",
+  "dependencies": {
+    "@dbd-soft-ui/logs": "^1.1.2",
+    "@keyv/mongo": "^2.2.8",
+    "dbd-soft-ui": "^1.7.13-beta.1",
+    "discord-dashboard": "^2.3.62",
+    "discord.js": "^14.12.1",
+    "mongoose": "^7.4.5"
+  }
+}
