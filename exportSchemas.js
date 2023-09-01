@@ -23,20 +23,8 @@ const xpPanel = require(`${pathPanel}xp`);
 // Data Schemas
 const auditlog = require(`${path}auditlog`);
 const autoreply = require(`${path}autoreply`);
-const blacklistuser = require(`${path}blacklist`);
-const blacklistserver = require(`${path}blacklistserver`);
-const ghostnum = require(`${path}ghostnum`);
-const ghostpingschma = require(`${path}ghostpingSchema`);
-const giveawaySchema = require(`${path}giveawaySchema`);
-const joinrole = require(`${path}joinrole`);
-const jointocreateSchema = require(`${path}jointocreate`);
-const linkSchema = require(`${path}linkSchema`);
-const modmail = require(`${path}modmail`);
 const pollSchema = require(`${path}pollSchema`);
 const reactionrole = require(`${path}reactionrole`);
-const ticketSchema = require(`${path}ticketSchema`);
-const warnSchema = require(`${path}warnSchema`);
-const welcomeSchema = require(`${path}welcomeSchema`);
 const xproles = require(`${path}xp-roles`);
 const xpChannel = require(`${path}xpChannel`);
 
@@ -59,20 +47,8 @@ module.exports = {
   xpPanel,
   auditlog,
   autoreply,
-  blacklistuser,
-  blacklistserver,
-  ghostnum,
-  ghostpingschma,
-  giveawaySchema,
-  joinrole,
-  jointocreateSchema,
-  linkSchema,
-  modmail,
   pollSchema,
   reactionrole,
-  ticketSchema,
-  warnSchema,
-  welcomeSchema,
   xproles,
   xpChannel,
 };
