@@ -17,3 +17,6 @@ https://github.com/toowake/dashboard/releases/
 
 # INVITE NEXUS
 [Invite here](https://discord.com/api/oauth2/authorize?client_id=1046468420037787720&permissions=8&scope=bot%20applications.commands)
+
+# Tutorials:
+## Forms: https://github.com/toowake/dashboard/blob/main/formTutorials.md
