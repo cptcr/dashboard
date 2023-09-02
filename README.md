@@ -1,4 +1,4 @@
-# Dashboard Version 1.0 (BETA)
+# Dashboard Version 1.1 (BETA)
 This is the official source code from NEXUS Dashbaord
 
 NPMs i used:
@@ -19,4 +19,4 @@ https://github.com/toowake/dashboard/releases/
 [Invite here](https://discord.com/api/oauth2/authorize?client_id=1046468420037787720&permissions=8&scope=bot%20applications.commands)
 
 # Tutorials:
-## Forms: https://github.com/toowake/dashboard/blob/main/formTutorials.md
+## Forms: [https://github.com/toowake/dashboard/blob/main/formTutorials.md](https://github.com/toowake/dashboard/blob/main/Forms/formTutorials.md)https://github.com/toowake/dashboard/blob/main/Forms/formTutorials.md
