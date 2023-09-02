@@ -25,6 +25,9 @@ module.exports = {
     client
 }
 
+//Form Types
+const form = require("./exportForms");
+
 //Client
 
 //Errors
@@ -33,12 +36,30 @@ module.exports = {
 const Handler = new DBD.Handler(
 );
 
+//Locales
+const LOCALES = require("./Locales/locales");
+
 //Dashboard
 (async ()=>{
     await DBD.useLicense(config.dbd.license);
     DBD.Dashboard = DBD.UpdatedClass();
+    //forms
+
+    (async () => {
+        await DBD.useLicense(config.dbd.license);
+        DBD.Dashboard = DBD.UpdatedClass();
+    
+        const Handler = new DBD.Handler( 
+            {
+                store: process.env.MONGODBURL
+            }
+        ); 
+    
+        const { Category, Option } = Handler; 
+    });    
 
     const Dashboard = new DBD.Dashboard({
+        acceptPrivacyPolicy: true,
         useCategorySet: true,
         //Support Server
         supportServer: {
@@ -76,11 +97,18 @@ const Handler = new DBD.Handler(
         },
         //underMaintenance
         underMaintenance: Maintenance,
+        //Permissions
+        requiredPermissions: DBD.DISCORD_FLAGS.Permissions.ADMINISTRATOR, 
+        //Logs
+        minimizedConsoleLogs: true,
+        //client
         bot: client,
+        //Theme
         theme: SoftUI({
+            locales: LOCALES,
             dbdriver: process.env.MONGODBURL,
             storage: Handler,
-            colorScheme: "dark",
+            colorScheme: "blue",
             /*themeColors: {
                 primaryColor: "#000000",
                 secondaryColor: "#ffffff"
@@ -95,7 +123,10 @@ const Handler = new DBD.Handler(
                 },
             },
             websiteName: "Nexus",
+            websiteTitle: "NEXUS - imagine a free discord bot",
+            dashboardURL: "http://localhost",
             supporteMail: "toowake@proton.me",
+            createdBy: "toowake, jasondev, d3rjust1n",
             icons: {
                 favicon: process.env.ICON,
                 noGuildIcon: "https://unlimitedworld.de/attachments/discord-mark-blue-png.64362/",
@@ -109,14 +140,26 @@ const Handler = new DBD.Handler(
             },
             index: {
                 card: {
-                    category: "Soft UI",
+                    category: "Nexus",
                     title: "NEXUS - imagine a free discord bot",
                     description: "NEXUS Panel",
-                    image: "/img/soft-ui.webp",
+                    image: "https://cdn.discordapp.com/emojis/1135253226413903955.png?quality=lossless",
                     link: {
                         enabled: true,
                         url: "http://localhost/commands"
-                    }
+                    },
+                },
+                feeds: {
+                    category: "feeds",
+                    title: "Feed",
+                    description: "NEXUS Panel is still in progress. For questions and suggestions join our discord server!",
+                    footer: "NEXUS"
+                },
+                information: {
+                    category: "information",
+                    title: "Information",
+                    description: "Nexus is the most powerful bot on discord. Its 100% free with no ads etc. Lets make paid bots useless.",
+                    footer: "NEXUS"
                 },
                 graph: {
                     enabled: true,
@@ -166,3 +209,4 @@ const Handler = new DBD.Handler(
     });
     Dashboard.init();
 })();
+
