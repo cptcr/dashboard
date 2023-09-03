@@ -19,8 +19,8 @@ const other = require("./Categorys/other");
 const sys = require("./Categorys/systems");
 
 //Setups
-const welcomeSetup = require('./Setups/welcome');
-const logsSetup = require('./Setups/logs');
+const welcomeSetup = require('./Systems/welcome');
+const logsSetup = require('./Systems/logs');
 
 //some imports
 const Maintenance = require("./Data/underMaintenance");
