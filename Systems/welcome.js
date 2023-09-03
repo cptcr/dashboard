@@ -1,5 +1,5 @@
 const WelcomeDB = require('../database/welcome');
-const { ChannelType } = require('disocrd.js');
+const { ChannelType } = require('discord.js');
 let DBD = require('discord-dashboard');
 
 const arrays = {
