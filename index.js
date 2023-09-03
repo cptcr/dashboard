@@ -2,6 +2,7 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const SoftUI = require('dbd-soft-ui');
 const config = require('./config.json');
+const os = require('os');
 let DBD = require('discord-dashboard');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.login(config.discord.token);
@@ -17,6 +18,10 @@ const nsfw = require("./Categorys/nsfw");
 const other = require("./Categorys/other");
 const sys = require("./Categorys/systems");
 
+//Setups
+const welcomeSetup = require('./Setups/welcome');
+const logsSetup = require('./Setups/logs');
+
 //some imports
 const Maintenance = require("./Data/underMaintenance");
 
@@ -24,13 +29,6 @@ const Maintenance = require("./Data/underMaintenance");
 module.exports = {
     client
 }
-
-//Form Types
-const form = require("./exportForms");
-
-//Client
-
-//Errors
 
 //handler
 const Handler = new DBD.Handler(
@@ -60,7 +58,7 @@ const LOCALES = require("./Locales/locales");
 
     const Dashboard = new DBD.Dashboard({
         acceptPrivacyPolicy: true,
-        useCategorySet: true,
+        useCategorySet: false,
         //Support Server
         supportServer: {
             slash: '/support-server',
@@ -92,7 +90,7 @@ const LOCALES = require("./Locales/locales");
         //Invite
         invite: {
             clientId: "1046468420037787720",
-            scopes:["bot"],
+            scopes:["bot", "application.commands"],
             permissions: '10982195068151',
         },
         //underMaintenance
@@ -115,10 +113,57 @@ const LOCALES = require("./Locales/locales");
             },*/
             customThemeOptions: {
                 index: async ({ req, res, config }) => {
+                    let username = req.session?.user?.username || "Guest"
+
+                    const cards = [
+                        {
+                            title: "Current User",
+                            icon: "single-02",
+                            getValue: username,
+                            progressBar: {
+                                enabled: false,
+                                getProgress: client.guilds.cache.size
+                            }
+                        },
+                        {
+                            title: "CPU",
+                            icon: "single-02",
+                            getValue: os.cpus()[0].model.replace('(R) Core(TM) ', ' ').replace(' CPU ', '').split('@')[0],
+                            progressBar: {
+                                enabled: false,
+                                getProgress: 50
+                            }
+                        },
+                        {
+                            title: "System Platform",
+                            icon: "single-02",
+                            getValue: os.platform(),
+                            progressBar: {
+                                enabled: false,
+                                getProgress: 50
+                            }
+                        },
+                        {
+                            title: "Server count",
+                            icon: "single-02",
+                            getValue: `${client.guilds.cache.size} out of 75`,
+                            progressBar: {
+                                enabled: true,
+                                getProgress: (client.guilds.cache.size / 75) * 100
+                            }
+                        }
+                    ]
+
+                    const graph = {
+                        values: [690, 524, 345, 645, 478, 592, 468, 783, 459, 230, 621, 345],
+                        labels: ["1m", "2m", "3m", "4m", "5m", "6m", "7m", "8m", "9m", "10m"]
+                    }
+
                     return {
+                        cards,
+                        graph,
                         values: [],
-                        graph: {},
-                        cards: [],
+                        premium: []
                     }
                 },
             },
@@ -126,14 +171,14 @@ const LOCALES = require("./Locales/locales");
             websiteTitle: "NEXUS - imagine a free discord bot",
             dashboardURL: "http://localhost",
             supporteMail: "toowake@proton.me",
-            createdBy: "toowake, jasondev, d3rjust1n",
+            createdBy: "Nexus Development",
             icons: {
                 favicon: process.env.ICON,
                 noGuildIcon: "https://unlimitedworld.de/attachments/discord-mark-blue-png.64362/",
                 sidebar: {
-                    darkUrl: 'https://assistantscenter.com/img/logo.png',
-                    lightUrl: 'https://assistanscenter.com/img/logo.png',
-                    hideName: true,
+                    darkUrl: 'https://cdn.discordapp.com/attachments/1147892533855260823/1147934381491634346/20230903_183644.png',
+                    lightUrl: 'https://cdn.discordapp.com/attachments/1147892533855260823/1147934317553664070/20230903_183622.png',
+                    hideName: false,
                     borderRadius: true,
                     alignCenter: true
                 },
@@ -143,11 +188,23 @@ const LOCALES = require("./Locales/locales");
                     category: "Nexus",
                     title: "NEXUS - imagine a free discord bot",
                     description: "NEXUS Panel",
-                    image: "https://cdn.discordapp.com/emojis/1135253226413903955.png?quality=lossless",
+                    image: "https://cdn.discordapp.com/attachments/1147892533855260823/1147934381491634346/20230903_183644.png",
                     link: {
                         enabled: true,
                         url: "http://localhost/commands"
                     },
+                },
+                 premium: {
+                    enabled: true,
+                    card: {
+                        title: "Want to suport this project?",
+                        description: "You can become premium!",
+                        bgImage: "https://cdn.discordapp.com/attachments/1112743789782638602/1147933261843157013/20230903_183622.png",
+                        button: {
+                            text: "Become Premium",
+                            url: "https://patreon.com/nexusdevelopment"
+                        }
+                    }
                 },
                 feeds: {
                     category: "feeds",
@@ -172,7 +229,7 @@ const LOCALES = require("./Locales/locales");
             },
             footer: {
                 replaceDefault: true,
-                text: "Made by toowake"
+                text: "Made by Nexus Development"
             },
             sweetalert: {
                 errors: {},
@@ -181,7 +238,7 @@ const LOCALES = require("./Locales/locales");
                 }
             },
             preloader: {
-                image: "https://wallpapers.com/images/featured/loading-background-nakoa70fbcx0evy9.jpg",
+                image: "https://cdn.discordapp.com/attachments/1112743789782638602/1147938332307898418/discord-avatar-512-E9R4D.gif",
                 spinner: false,
                 text: "Loading page...",
             },
@@ -205,6 +262,8 @@ const LOCALES = require("./Locales/locales");
                 other,
             ]}),
             settings: [
+                welcomeSetup,
+                logsSetup
             ],
     });
     Dashboard.init();

@@ -1,4 +1,4 @@
-# Dashboard Version 1.2 (BETA)
+# Dashboard Version 1.3 (BETA)
 This is the official source code from NEXUS Dashbaord
 
 NPMs i used:
