@@ -1,5 +1,5 @@
 const nl = {
-    name: "Nederlands",
+    name: "Dutch",
     index: {
         feeds: ["Huidige gebruikers", "CPU", "Systeemplatform", "Aantal servers"],
         card: {
