@@ -1,19 +1,19 @@
 {
     "database": {
-        "mongose": "mongodb+srv://soyomen:00oliver@cluster0.smgqh.mongodb.net/?retryWrites=true&w=majority"
+        "mongose": ""
     },
     "discord": {
-        "token": "MTA2NjQ3MTM0ODI4MjYwNTcwMA.GlPR40.ZpR8QKNwszT-ZQ7XHuRvNh7DF4YFozV1G9BkUY",
+        "token": "",
         "client": {
-            "id": "1066471348282605700",
-            "secret": "xScuDOnEjYjbACZlU3m0Jadh8_3FzT1Q"
+            "id": "",
+            "secret": ""
         }
     },
     "dbd": {
-        "port": 4777,
-        "domain": "http://bot.silvercityrp.com:4777",
+        "port": 80,
+        "domain": "http://localhost",
         "redirectUri": "/discord/callback",
-        "license": "62daebbb-4d86-450d-b117-b4b29025896d",
+        "license": "",
         "ownerIDs": ["972509807988846634","998540329995227266","931870926797160538"]
     }
 }
