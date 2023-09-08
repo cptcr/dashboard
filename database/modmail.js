@@ -5,4 +5,4 @@ const Schema = new mongoose.Schema({
     Channel: String,
 });
 
-module.exports = mongoose.model("logsystem", Schema);
+module.exports = mongoose.model("modmailSystem", Schema);

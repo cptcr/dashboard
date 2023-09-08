@@ -1,6 +1,6 @@
 {
-  "name": "dashboard-v1.3.0",
-  "version": "1.3.0",
+  "name": "dashboard-v1.4.0",
+  "version": "1.4.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,9 +11,11 @@
   "dependencies": {
     "@dbd-soft-ui/logs": "^1.1.2",
     "@keyv/mongo": "^2.2.8",
-    "dbd-soft-ui": "^1.7.13-beta.1",
+    "connect-mongodb-session": "^3.1.1",
+    "dbd-soft-ui": "^1.7.14-beta.1",
     "discord-dashboard": "^2.3.62",
     "discord.js": "^14.12.1",
+    "express-session": "^1.17.3",
     "mongoose": "^7.4.5",
     "os": "^0.1.2"
   }

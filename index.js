@@ -21,18 +21,19 @@ const sys = require("./Categorys/systems");
 //Setups
 const welcomeSetup = require('./Systems/welcome');
 const logsSetup = require('./Systems/logs');
+const modmailSetup = require('./Systems/modmail');
+const jtcSetup = require('./Systems/jtc');
+const ticketSetup = require('./Systems/ticket');
+const giveawaySetup = require('./Systems/giveaway');
 
 //some imports
 const Maintenance = require("./Data/underMaintenance");
 
 //Export modules
-module.exports = {
-    client
-}
+module.exports = { client }
 
 //handler
-const Handler = new DBD.Handler(
-);
+const Handler = new DBD.Handler();
 
 //Locales
 const LOCALES = require("./Locales/locales");
@@ -41,24 +42,10 @@ const LOCALES = require("./Locales/locales");
 (async ()=>{
     await DBD.useLicense(config.dbd.license);
     DBD.Dashboard = DBD.UpdatedClass();
-    //forms
-
-    (async () => {
-        await DBD.useLicense(config.dbd.license);
-        DBD.Dashboard = DBD.UpdatedClass();
-    
-        const Handler = new DBD.Handler( 
-            {
-                store: process.env.MONGODBURL
-            }
-        ); 
-    
-        const { Category, Option } = Handler; 
-    });    
 
     const Dashboard = new DBD.Dashboard({
         acceptPrivacyPolicy: true,
-        useCategorySet: false,
+        useCategorySet: true,
         //Support Server
         supportServer: {
             slash: '/support-server',
@@ -75,13 +62,8 @@ const LOCALES = require("./Locales/locales");
         //owners
         ownerIDs: config.dbd.ownerIDs,
         //Maintenance
-        useThemeMaintenance: false,
+        useThemeMaintenance: true,
         useTheme404: true,
-        //Support Sever
-        supportServer: {
-            slash: '/support-server',
-            inviteUrl: 'https://discord.gg/z8nxPve4pn'
-        },
         //Join server
         guildAfterAuthorization: {
             use: true,
@@ -89,8 +71,8 @@ const LOCALES = require("./Locales/locales");
         },
         //Invite
         invite: {
-            clientId: "1046468420037787720",
-            scopes:["bot", "application.commands"],
+            clientId: config.discord.client.id,
+            scopes:["bot", "applications.commands"],
             permissions: '10982195068151',
         },
         //underMaintenance
@@ -104,12 +86,12 @@ const LOCALES = require("./Locales/locales");
         //Theme
         theme: SoftUI({
             locales: LOCALES,
-            dbdriver: process.env.MONGODBURL,
+            dbdriver: config.database.mongose,
             storage: Handler,
             colorScheme: "blue",
             /*themeColors: {
-                primaryColor: "#000000",
-                secondaryColor: "#ffffff"
+                secondaryColor: "#000000",
+                primaryColor: "#ff0000"
             },*/
             customThemeOptions: {
                 index: async ({ req, res, config }) => {
@@ -127,7 +109,7 @@ const LOCALES = require("./Locales/locales");
                         },
                         {
                             title: "CPU",
-                            icon: "single-02",
+                            icon: "settings",
                             getValue: os.cpus()[0].model.replace('(R) Core(TM) ', ' ').replace(' CPU ', '').split('@')[0],
                             progressBar: {
                                 enabled: false,
@@ -146,10 +128,10 @@ const LOCALES = require("./Locales/locales");
                         {
                             title: "Server count",
                             icon: "single-02",
-                            getValue: `${client.guilds.cache.size} out of 75`,
+                            getValue: `${client.guilds.cache.size} Guilds`,
                             progressBar: {
                                 enabled: true,
-                                getProgress: (client.guilds.cache.size / 75) * 100
+                                getProgress: (client.guilds.cache.size / 100) * 100
                             }
                         }
                     ]
@@ -169,11 +151,11 @@ const LOCALES = require("./Locales/locales");
             },
             websiteName: "Nexus",
             websiteTitle: "NEXUS - imagine a free discord bot",
-            dashboardURL: "http://localhost",
+            dashboardURL: config.dbd.domain,
             supporteMail: "toowake@proton.me",
             createdBy: "Nexus Development",
             icons: {
-                favicon: process.env.ICON,
+                favicon: "https://cdn.discordapp.com/attachments/1147892533855260823/1147934381491634346/20230903_183644.png",
                 noGuildIcon: "https://unlimitedworld.de/attachments/discord-mark-blue-png.64362/",
                 sidebar: {
                     darkUrl: 'https://cdn.discordapp.com/attachments/1147892533855260823/1147934381491634346/20230903_183644.png',
@@ -191,7 +173,7 @@ const LOCALES = require("./Locales/locales");
                     image: "https://cdn.discordapp.com/attachments/1147892533855260823/1147934381491634346/20230903_183644.png",
                     link: {
                         enabled: true,
-                        url: "http://localhost/commands"
+                        url: config.dbd.domain + "/commands"
                     },
                 },
                  premium: {
@@ -263,9 +245,12 @@ const LOCALES = require("./Locales/locales");
             ]}),
             settings: [
                 welcomeSetup,
-                logsSetup
+                logsSetup,
+                modmailSetup,
+                jtcSetup,
+                ticketSetup,
+                giveawaySetup
             ],
     });
     Dashboard.init();
 })();
-
