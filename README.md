@@ -19,7 +19,10 @@ https://docs.assistantscenter.com/discord-dashboard/v2/#/
 https://github.com/toowake/dashboard/releases/
 
 # JOIN US
+## Bot
 [Invite here](https://discord.com/api/oauth2/authorize?client_id=1046468420037787720&permissions=8&scope=bot%20applications.commands)
+
+## Discord: 
 [Discord](https://discord.gg/z8nxPve4pn)
 
 # Tutorials:
